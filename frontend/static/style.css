@@ -1,0 +1,65 @@
+/* Custom Variable definitions */
+:root {
+    --bg-color: #0b0f1a;
+    --card-bg: #111827;
+    --accent-indigo: #6366f1;
+    --text-main: #f1f5f9;
+    --text-dim: #94a3b8;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 24px;
+    overflow: hidden;
+}
+
+/* Your Specific Grid Logic */
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 16px;
+    height: 85vh;
+}
+
+.div1 { grid-column: span 5 / span 5; grid-row: span 2 / span 2; }
+.div2 { grid-column: span 2 / span 2; grid-row: span 2 / span 2; grid-row-start: 3; }
+.div3 { grid-column: span 3 / span 3; grid-row: span 2 / span 2; grid-column-start: 3; grid-row-start: 3; }
+.div4 { grid-row-start: 5; }
+.div5 { grid-column: span 2 / span 2; grid-row-start: 5; }
+.div6 { grid-column: span 2 / span 2; grid-column-start: 4; grid-row-start: 5; }
+
+/* Dashboard Card Styling */
+.grid-item {
+    background: var(--card-bg);
+    border: 1px solid #1e293b;
+    border-radius: 24px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.grid-item:hover {
+    border-color: var(--accent-indigo);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.4) 0%, rgba(17, 24, 39, 1) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.custom-scroll {
+    overflow-y: auto;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}

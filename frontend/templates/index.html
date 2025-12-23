@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Scholar Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body class="bg-[#0b0f1a] text-slate-200 p-6 overflow-hidden">
+    <div class="max-w-[1440px] mx-auto">
+      <header class="flex justify-between items-center mb-6">
+        <div>
+          <h1
+            class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400"
+          >
+            ADAPTIVE LEARNING ENGINE
+          </h1>
+          <p class="text-[10px] text-slate-500 font-mono tracking-[0.2em]">
+            USER_ID: {{ student_id }} | SESSION_ACTIVE
+          </p>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="text-right">
+            <p class="text-xs text-slate-500 font-bold uppercase">
+              Current Goal
+            </p>
+            <p class="text-sm font-semibold text-indigo-300">
+              {{ current_goal }}
+            </p>
+          </div>
+          <div
+            class="h-10 w-10 bg-slate-800 rounded-full border border-slate-700 flex items-center justify-center"
+          >
+            <i data-lucide="user" class="w-5 h-5"></i>
+          </div>
+        </div>
+      </header>
+
+      <div class="parent">
+        <div class="div1 grid-item hero-gradient relative">
+          <div class="relative z-10">
+            <span
+              class="bg-indigo-500 text-[10px] font-black px-2 py-1 rounded mb-4 inline-block"
+              >AI BEST MATCH</span
+            >
+            <h2 class="text-4xl font-black text-white leading-tight">
+              {{ primary_course.title }}
+            </h2>
+            <p class="text-slate-400 mt-3 max-w-xl text-sm leading-relaxed">
+              <span class="text-indigo-400 font-bold">Reasoning:</span> {{
+              primary_course.reasoning }}
+            </p>
+            <button
+              class="mt-6 bg-white text-black px-6 py-2 rounded-lg font-bold hover:bg-indigo-400 hover:text-white transition-all flex items-center gap-2"
+            >
+              Start Learning <i data-lucide="play" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <i
+            data-lucide="cpu"
+            class="absolute right-10 bottom-10 w-32 h-32 opacity-5 text-indigo-400"
+          ></i>
+        </div>
+
+        <div class="div2 grid-item flex flex-col">
+          <h3
+            class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4"
+          >
+            Skill Pattern Analysis
+          </h3>
+          <div class="flex-grow">
+            <canvas id="skillRadar"></canvas>
+          </div>
+        </div>
+
+        <div class="div3 grid-item flex flex-col">
+          <h3
+            class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 flex justify-between"
+          >
+            Personalized Feed
+            <span>Top {{ recommendations|length }} Items</span>
+          </h3>
+          <div class="space-y-3 overflow-y-auto custom-scroll pr-2">
+            {% for item in recommendations %}
+            <div
+              class="group flex items-center justify-between p-3 rounded-xl bg-slate-800/40 border border-transparent hover:border-indigo-500/50 hover:bg-slate-800 transition-all cursor-pointer"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-8 h-8 rounded bg-slate-700 flex items-center justify-center group-hover:bg-indigo-600"
+                >
+                  <i data-lucide="book-open" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-slate-200">
+                    {{ item.name }}
+                  </p>
+                  <p class="text-[10px] text-slate-500 uppercase font-mono">
+                    {{ item.category }}
+                  </p>
+                </div>
+              </div>
+              <div class="text-right">
+                <p class="text-xs font-mono text-indigo-400">
+                  {{ item.match_score }}%
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="div4 grid-item flex flex-col items-center justify-center">
+          <p class="text-[10px] font-bold text-slate-500 uppercase">
+            Precision@K
+          </p>
+          <p class="text-3xl font-black text-indigo-500">
+            {{ metrics.precision }}
+          </p>
+        </div>
+
+        <div class="div5 grid-item flex items-center justify-between">
+          <div>
+            <p
+              class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter"
+            >
+              Quiz Performance
+            </p>
+            <p class="text-xl font-bold text-emerald-400">
+              Stable {{ metrics.avg_score }}%
+            </p>
+          </div>
+          <div class="flex items-end gap-1 h-12">
+            {% for h in metrics.history %}
+            <div
+              class="bg-indigo-500/50 w-2 rounded-t-sm"
+              style="height: {{ h }}%"
+            ></div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="div6 grid-item flex items-center gap-4">
+          <div class="p-3 bg-indigo-600/20 rounded-xl">
+            <i data-lucide="timer" class="text-indigo-400 w-6 h-6"></i>
+          </div>
+          <div>
+            <p
+              class="text-[10px] font-bold text-slate-500 uppercase tracking-widest"
+            >
+              Time Spent
+            </p>
+            <p class="text-2xl font-black text-white">{{ time_spent }}h</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Initialize Icons
+      lucide.createIcons();
+
+      // Skill Radar Data from Backend
+      const ctx = document.getElementById('skillRadar').getContext('2d');
+      new Chart(ctx, {
+          type: 'radar',
+          data: {
+              labels: ['Logic', 'Math', 'Code', 'Theory', 'Speed'],
+              datasets: [{
+                  label: 'Current Profile',
+                  data: {{ radar_data | tojson }},
+                  backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                  borderColor: '#6366f1',
+                  borderWidth: 2,
+                  pointBackgroundColor: '#6366f1',
+              }]
+          },
+          options: {
+              maintainAspectRatio: false,
+              scales: {
+                  r: {
+                      grid: { color: '#1e293b' },
+                      angleLines: { color: '#1e293b' },
+                      ticks: { display: false },
+                      pointLabels: { color: '#64748b', font: { size: 10 } }
+                  }
+              },
+              plugins: { legend: { display: false } }
+          }
+      });
+    </script>
+  </body>
+</html>
