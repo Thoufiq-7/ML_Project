@@ -35,7 +35,7 @@ def home():
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
-    user_input = request.form.get('user_id').lower().strip()
+    user_input = request.form.get('user_id')
     all_courses = df['Course Name Lower'].tolist()
     closest_match = difflib.get_close_matches(user_input, all_courses, n=1, cutoff=0.3)
 
