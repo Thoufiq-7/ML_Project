@@ -1,22 +1,40 @@
 /* 1. Global Reset & Dark Theme */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
 :root {
-  --bg-dark: #050505; /* Deeper black for better neon contrast */
+  --bg-dark: #050505;
   --card-bg: #0d0d0d;
-  --accent: #00ff41; /* Matrix Green */
+  --accent: #00ff41;
   --accent-glow: rgba(0, 255, 65, 0.3);
-  --text-main: #ffffff;
-  --text-dim: #888888;
+  
+  /* NEW FONT VARIABLES */
+  --font-main: 'JetBrains Mono', monospace; /* For UI/Text */
+  --font-header: 'Orbitron', sans-serif;    /* For Titles */
 }
 
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-main); /* Applied globally */
   margin: 0;
   padding: 20px;
   height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+/* Apply the "Space" font to headers */
+h1, h2, h3, h4, .badge {
+  font-family: var(--font-header);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Update the Status Bar font for a "Terminal" look */
+.div2 {
+  font-family: var(--font-main);
+  font-weight: bold;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
 }
 
 /* 2. Your Grid Layout */
