@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pickle
+import difflib 
 
 app = Flask(__name__, 
             template_folder='frontend/templates', 
@@ -34,25 +35,30 @@ def home():
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
-    course_title = request.form.get('user_id') # We'll use the input for Course Name now
-    
-    if course_title not in df['Course Name'].values:
-        return jsonify({"error": "Course not found"}), 404
+    user_input = request.form.get('user_id').lower().strip()
+    all_courses = df['Course Name Lower'].tolist()
+    closest_match = difflib.get_close_matches(user_input, all_courses, n=1, cutoff=0.3)
 
-    # Get index of the course
-    idx = df[df['Course Name'] == course_title].index[0]
+    if not closest_match:
+        return jsonify({"recs": []})
+
+    idx = df[df['Course Name Lower'] == closest_match[0]].index[0]
+    sim_scores = cosine_similarity(tfidf_matrix[idx], tfidf_matrix).flatten()
+    related_indices = sim_scores.argsort()[-11:-1][::-1]
     
-    # Get similarity scores for all courses
-    sim_scores = list(enumerate(cosine_sim[idx]))
+    recs_list = []
+    for i in related_indices:
+        row = df.iloc[i]
+        # We use the EXACT column names you provided
+        recs_list.append({
+            "name": str(row['Course Name']),
+            "univ": str(row['University']),
+            "diff": str(row['Difficulty Level']),
+            "rate": str(row['Course Rating']),
+            "url": str(row['Course URL'])
+        })
     
-    # Sort by highest score, skip the first one (itself)
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)[1:6]
-    
-    # Get titles
-    course_indices = [i[0] for i in sim_scores]
-    recs = df['Course Name'].iloc[course_indices].tolist()
-    
-    return jsonify({"recs": recs})
+    return jsonify({"recs": recs_list})
 
 if __name__ == '__main__':
     app.run(debug=True)
