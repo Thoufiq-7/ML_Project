@@ -1,14 +1,14 @@
 /* 1. Global Reset & Dark Theme */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap");
 :root {
   --bg-dark: #050505;
   --card-bg: #3c4f87;
   --accent: #00ff41;
   --accent-glow: rgba(0, 255, 65, 0.3);
-  
+
   /* NEW FONT VARIABLES */
-  --font-main: 'JetBrains Mono', monospace; /* For UI/Text */
-  --font-header: 'Orbitron', sans-serif;    /* For Titles */
+  --font-main: "JetBrains Mono", monospace; /* For UI/Text */
+  --font-header: "Orbitron", sans-serif; /* For Titles */
 }
 
 body {
@@ -23,7 +23,11 @@ body {
 }
 
 /* Apply the "Space" font to headers */
-h1, h2, h3, h4, .badge {
+h1,
+h2,
+h3,
+h4,
+.badge {
   font-family: var(--font-header);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -68,7 +72,7 @@ h1, h2, h3, h4, .badge {
 .div1 {
   grid-column: span 5 / span 5;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
