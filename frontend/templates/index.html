@@ -42,50 +42,6 @@
 
       <div class="div2">System Status: Operational</div>
     </div>
-
-    <script>
-      async function getRecs() {
-        const userId = document.getElementById("userId").value;
-        const btn = document.getElementById("submitBtn");
-        const list = document.getElementById("resultsList");
-        const loader = document.getElementById("loader");
-
-        if (!userId) return alert("Enter an ID");
-
-        // UI State: Loading
-        btn.disabled = true;
-        loader.classList.remove("hidden");
-        list.innerHTML = "";
-
-        try {
-          const formData = new FormData();
-          formData.append("user_id", userId);
-
-          const response = await fetch("/recommend", {
-            method: "POST",
-            body: formData,
-          });
-
-          const data = await response.json();
-
-          loader.classList.add("hidden");
-          btn.disabled = false;
-
-          if (data.recs && data.recs.length > 0) {
-            list.innerHTML = data.recs
-              .map(
-                (id) => `<li><span class="icon">📚</span> Course ID: ${id}</li>`
-              )
-              .join("");
-          } else {
-            list.innerHTML = `<li class="error">No matches found for ID: ${userId}</li>`;
-          }
-        } catch (err) {
-          loader.classList.add("hidden");
-          btn.disabled = false;
-          list.innerHTML = `<li class="error">Connection Error</li>`;
-        }
-      }
-    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>
