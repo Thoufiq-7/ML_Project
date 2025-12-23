@@ -10,29 +10,37 @@
     />
   </head>
   <body>
-    <div class="card">
-      <header>
-        <h1>Course Recommender</h1>
-        <p>Enter your ID to see what's next</p>
-      </header>
-
-      <div class="input-group">
-        <input
-          type="text"
-          id="userId"
-          placeholder="Enter a Course you liked (e.g. Machine Learning)"
-        />
-        <button onclick="getRecs()" id="submitBtn">Generate</button>
+    <div class="parent">
+      <div class="div1">
+        <h1>Course Engine</h1>
+        <div class="search-box">
+          <input
+            type="text"
+            id="courseInput"
+            placeholder="Type a course name..."
+          />
+          <button onclick="getRecs()">Generate</button>
+        </div>
       </div>
 
-      <div id="loader" class="hidden">Scanning patterns...</div>
-
-      <div class="results-container">
-        <h3>Recommendations:</h3>
-        <ul id="resultsList">
-          <li class="placeholder">Results will appear here</li>
-        </ul>
+      <div class="div3">
+        <h3>Trending</h3>
+        <p>Data Science</p>
+        <p>Web Dev</p>
       </div>
+
+      <div class="div4">
+        <h3>Filters</h3>
+        <span class="badge">Beginner</span>
+        <span class="badge">Advanced</span>
+      </div>
+
+      <div class="div5">
+        <h3>Recommended for You</h3>
+        <div id="resultsList" class="netflix-row"></div>
+      </div>
+
+      <div class="div2">System Status: Operational</div>
     </div>
 
     <script>
