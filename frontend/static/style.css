@@ -118,35 +118,59 @@ h3 {
 }
 
 /* 5. Search UI */
+/* 1. The Search Container */
 .search-box {
   display: flex;
-  gap: 10px;
+  gap: 15px;
+  background: transparent; /* Remove bisque, it blocks the glow */
+  padding: 5px;
+  align-items: center;
 }
 
+/* 2. The Neon Input Field */
 input {
-  background: #000;
-  border: 1px solid #333;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 6px;
-  width: 250px;
+  background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent */
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 12px 20px;
+  border-radius: 8px;
+  width: 300px;
+  font-family: var(--font-main);
   outline: none;
+  /* The Glow */
+  box-shadow: 0 0 5px var(--accent-glow), 
+              inset 0 0 5px var(--accent-glow);
+  transition: all 0.3s ease;
 }
 
 input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 10px var(--accent-glow);
+  box-shadow: 0 0 15px var(--accent), 
+              inset 0 0 10px var(--accent-glow);
+  background: #000;
 }
 
+/* 3. The Neon Button (The "Power" Switch) */
 button {
-  background: var(--accent);
-  color: black;
-  border: none;
-  padding: 10px 20px;
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  padding: 10px 25px;
+  font-family: var(--font-header);
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 0 15px var(--accent-glow);
+  text-transform: uppercase;
+  /* Heavy Outer Glow */
+  box-shadow: 0 0 10px var(--accent-glow);
+  text-shadow: 0 0 5px var(--accent);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: var(--accent);
+  color: #000; /* Text turns black when background glows green */
+  box-shadow: 0 0 25px var(--accent);
+  transform: translateY(-2px);
 }
 
 /* 6. Netflix Row & Cards */
