@@ -1,8 +1,9 @@
 /* 1. Global Reset & Dark Theme */
 :root {
-  --bg-dark: #0a0a0a;
-  --card-bg: #161616;
-  --accent: #00ff41; /* Matrix/Terminal Green */
+  --bg-dark: #050505; /* Deeper black for better neon contrast */
+  --card-bg: #0d0d0d;
+  --accent: #00ff41; /* Matrix Green */
+  --accent-glow: rgba(0, 255, 65, 0.3);
   --text-main: #ffffff;
   --text-dim: #888888;
 }
@@ -15,7 +16,7 @@ body {
   padding: 20px;
   height: 100vh;
   box-sizing: border-box;
-  overflow: hidden; /* Prevent body scroll, let the grid handle it */
+  overflow: hidden;
 }
 
 /* 2. Your Grid Layout */
@@ -27,16 +28,25 @@ body {
   height: 100%;
 }
 
-/* Common Div Styling */
+/* 3. NEON EFFECT FOR EVERY DIV */
 .parent > div {
   background: var(--card-bg);
-  border: 1px solid #333;
+  border: 1px solid var(--accent-glow);
   border-radius: 12px;
   padding: 20px;
   transition: all 0.3s ease;
+  /* Layered box shadow: Outer glow, then a tighter inner glow */
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.1),
+    inset 0 0 10px rgba(0, 255, 65, 0.05);
 }
 
-/* 3. Positioning the Zones */
+/* Pulse effect on hover */
+.parent > div:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow), inset 0 0 15px var(--accent-glow);
+}
+
+/* 4. Positioning the Zones */
 .div1 {
   grid-column: span 5 / span 5;
   display: flex;
@@ -51,6 +61,8 @@ body {
   color: var(--accent);
   display: flex;
   align-items: center;
+  /* Unique glow for status bar */
+  text-shadow: 0 0 5px var(--accent);
 }
 
 .div3 {
@@ -73,7 +85,17 @@ body {
   flex-direction: column;
 }
 
-/* 4. Search UI (Inside Div 1) */
+/* Titles get neon text-shadow */
+h1,
+h3 {
+  margin-top: 0;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent-glow);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* 5. Search UI */
 .search-box {
   display: flex;
   gap: 10px;
@@ -81,11 +103,17 @@ body {
 
 input {
   background: #000;
-  border: 1px solid #444;
+  border: 1px solid #333;
   color: white;
   padding: 10px 15px;
   border-radius: 6px;
   width: 250px;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 button {
@@ -96,13 +124,10 @@ button {
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
+  box-shadow: 0 0 15px var(--accent-glow);
 }
 
-button:hover {
-  transform: scale(1.05);
-}
-
-/* 5. The Netflix Row (Inside Div 5) */
+/* 6. Netflix Row & Cards */
 .netflix-row {
   display: flex;
   gap: 20px;
@@ -115,54 +140,26 @@ button:hover {
 .netflix-row::-webkit-scrollbar {
   height: 4px;
 }
-
 .netflix-row::-webkit-scrollbar-thumb {
   background: var(--accent);
-  border-radius: 10px;
 }
 
-/* 6. Individual Course Cards */
 .course-card {
   min-width: 220px;
   max-width: 220px;
-  background: #222;
-  border: 1px solid #333;
+  background: #000;
+  border: 1px solid #222;
   border-radius: 10px;
   padding: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .course-card:hover {
   border-color: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
   transform: translateY(-5px);
-  background: #2a2a2a;
-}
-
-.course-card h4 {
-  margin: 10px 0;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-.univ {
-  color: var(--text-dim);
-  font-size: 0.8rem;
-  margin-bottom: 10px;
-}
-
-.badge {
-  font-size: 0.7rem;
-  background: #333;
-  padding: 4px 8px;
-  border-radius: 4px;
-  color: var(--accent);
-}
-
-.rating {
-  color: #ffcc00;
-  font-weight: bold;
-  font-size: 0.85rem;
 }
