@@ -1,124 +1,67 @@
+/* 1. Global Reset & Dark Theme */
 :root {
-  --bg: #0f0f0f;
-  --card-bg: #1e1e1e;
-  --accent: #00ff41; /* Matrix Green */
-  --text: #ffffff;
-  --error: #ff4b2b;
+  --bg-dark: #0a0a0a;
+  --card-bg: #161616;
+  --accent: #00ff41; /* Matrix/Terminal Green */
+  --text-main: #ffffff;
+  --text-dim: #888888;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 20px;
   height: 100vh;
-  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent body scroll, let the grid handle it */
 }
 
-.card {
+/* 2. Your Grid Layout */
+.parent {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 15px;
+  height: 100%;
+}
+
+/* Common Div Styling */
+.parent > div {
   background: var(--card-bg);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  width: 100%;
-  max-width: 400px;
   border: 1px solid #333;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
-}
-
-header p {
-  color: #888;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-.input-group {
+/* 3. Positioning the Zones */
+.div1 {
+  grid-column: span 5 / span 5;
   display: flex;
-  gap: 10px;
-  margin-bottom: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
-input {
-  flex: 1;
-  background: #111;
-  border: 1px solid #444;
-  padding: 12px;
-  color: white;
-  border-radius: 6px;
-  outline: none;
-}
-
-input:focus {
-  border-color: var(--accent);
-}
-
-button {
-  background: var(--accent);
-  color: black;
-  border: none;
-  padding: 0 20px;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: transform 0.1s;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-button:disabled {
-  background: #444;
-  cursor: not-allowed;
-}
-
-.results-container h3 {
-  font-size: 1rem;
-  border-bottom: 1px solid #333;
-  padding-bottom: 8px;
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  background: #252525;
-  margin-bottom: 8px;
-  padding: 12px;
-  border-radius: 6px;
+.div2 {
+  grid-column: span 5 / span 5;
+  grid-row-start: 5;
+  font-size: 0.8rem;
+  color: var(--accent);
   display: flex;
   align-items: center;
-  font-size: 0.95rem;
-  border-left: 3px solid var(--accent);
 }
 
-.placeholder {
-  border-left-color: #555;
-  color: #555;
+.div3 {
+  grid-column: span 2 / span 2;
+  grid-row: span 2 / span 2;
+  grid-row-start: 2;
 }
-.error {
-  border-left-color: var(--error);
-  color: var(--error);
-}
-.hidden {
-  display: none;
-}
-#loader {
-  text-align: center;
-  color: var(--accent);
-  font-size: 0.8rem;
-  margin-bottom: 10px;
+
+.div4 {
+  grid-column: span 2 / span 2;
+  grid-row-start: 4;
 }
 
 .div5 {
@@ -126,36 +69,100 @@ li {
   grid-row: span 3 / span 3;
   grid-column-start: 3;
   grid-row-start: 2;
-  background: #1a1a1a;
-  padding: 20px;
-  border-radius: 12px;
-  overflow: hidden; /* Keeps the grid from exploding */
+  display: flex;
+  flex-direction: column;
 }
 
+/* 4. Search UI (Inside Div 1) */
+.search-box {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  background: #000;
+  border: 1px solid #444;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  width: 250px;
+}
+
+button {
+  background: var(--accent);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* 5. The Netflix Row (Inside Div 5) */
 .netflix-row {
   display: flex;
-  gap: 15px;
-  overflow-x: scroll; /* The magic for horizontal swiping */
-  padding: 10px 0;
-  height: 90%;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 0;
+  scroll-behavior: smooth;
+  flex-grow: 1;
 }
 
-/* Hide the ugly scrollbar */
 .netflix-row::-webkit-scrollbar {
-  display: none;
+  height: 4px;
 }
 
+.netflix-row::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+/* 6. Individual Course Cards */
 .course-card {
   min-width: 220px;
-  background: #252525;
+  max-width: 220px;
+  background: #222;
   border: 1px solid #333;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 15px;
-  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   cursor: pointer;
 }
 
 .course-card:hover {
-  border-color: #00ff41;
+  border-color: var(--accent);
   transform: translateY(-5px);
+  background: #2a2a2a;
+}
+
+.course-card h4 {
+  margin: 10px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.univ {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.badge {
+  font-size: 0.7rem;
+  background: #333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+.rating {
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 0.85rem;
 }
