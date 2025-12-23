@@ -1,1 +1,228 @@
-check commit by kesavan
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Scholar | Personalized Recommendation Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-slate-950 text-slate-50 antialiased min-h-screen p-6">
+    <nav
+      class="max-w-7xl mx-auto flex justify-between items-center mb-12 border-b border-slate-800 pb-6"
+    >
+      <div class="flex items-center gap-3">
+        <div class="bg-indigo-600 p-2 rounded-lg">
+          <i data-lucide="brain-circuit" class="text-white"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tighter"
+          >EDU-GENESIS
+          <span class="text-indigo-500 text-sm font-mono">v1.0</span></span
+        >
+      </div>
+      <div class="flex gap-8 text-sm font-medium text-slate-400">
+        <a href="#" class="hover:text-indigo-400 transition">Learning Path</a>
+        <a href="#" class="hover:text-indigo-400 transition">Skill Analytics</a>
+        <a href="#" class="text-white border-b-2 border-indigo-500"
+          >AI Recommendations</a
+        >
+      </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-12 gap-6">
+      <section class="col-span-12 lg:col-span-4 space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <i data-lucide="bar-chart-3" class="text-indigo-400 w-5 h-5"></i>
+            Learning Patterns
+          </h3>
+          <canvas id="skillChart" class="w-full"></canvas>
+          <div class="mt-4 space-y-3">
+            <div class="flex justify-between text-xs">
+              <span class="text-slate-400 text-sm">Focus: Data Structures</span>
+              <span class="text-indigo-400 font-mono">Top 5%</span>
+            </div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full">
+              <div
+                class="bg-indigo-500 h-1.5 rounded-full"
+                style="width: 85%"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-rose-950/20 border border-rose-900/30 rounded-2xl p-6">
+          <h3
+            class="text-rose-400 text-sm font-bold uppercase tracking-widest mb-4"
+          >
+            Urgent Skill Gaps
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide="alert-circle"
+                class="text-rose-500 w-5 h-5 shrink-0"
+              ></i>
+              <p class="text-sm text-slate-300">
+                Struggled with
+                <span class="text-white font-bold italic">Asynchronous JS</span>
+                in Quiz #4. Recommend immediate refresher.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="col-span-12 lg:col-span-8">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold">Top-N Recommendations</h2>
+          <span
+            class="px-3 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full text-xs font-mono"
+            >Precision@K: 0.94</span
+          >
+        </div>
+
+        <div class="space-y-4">
+          <div
+            class="group bg-slate-900 border border-slate-800 p-5 rounded-2xl hover:border-indigo-500/50 transition-all cursor-pointer"
+          >
+            <div class="flex justify-between items-start">
+              <div class="flex gap-4">
+                <div
+                  class="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-indigo-600 transition"
+                >
+                  <i data-lucide="code-2" class="w-8 h-8"></i>
+                </div>
+                <div>
+                  <h4
+                    class="text-xl font-bold group-hover:text-indigo-400 transition"
+                  >
+                    Advanced React Design Patterns
+                  </h4>
+                  <p class="text-slate-400 text-sm mt-1">
+                    Difficulty: Intermediate • Est. Time: 4.5 hrs
+                  </p>
+                  <div class="mt-3 flex gap-2">
+                    <span
+                      class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400 uppercase font-bold"
+                      >Frontend</span
+                    >
+                    <span
+                      class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400 uppercase font-bold"
+                      >Optimization</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-indigo-400 font-mono text-sm">98% Match</div>
+                <button
+                  class="mt-4 bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm font-bold transition"
+                >
+                  Start Now
+                </button>
+              </div>
+            </div>
+            <div
+              class="mt-4 pt-4 border-t border-slate-800 text-xs text-slate-500 italic"
+            >
+              "Recommended because you completed 'React Basics' and spent 120
+              mins researching 'Custom Hooks' last week."
+            </div>
+          </div>
+
+          <div
+            class="group bg-slate-900 border border-slate-800 p-5 rounded-2xl hover:border-emerald-500/50 transition-all cursor-pointer"
+          >
+            <div class="flex justify-between items-start">
+              <div class="flex gap-4">
+                <div
+                  class="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-emerald-600 transition"
+                >
+                  <i data-lucide="database" class="w-8 h-8"></i>
+                </div>
+                <div>
+                  <h4
+                    class="text-xl font-bold group-hover:text-emerald-400 transition"
+                  >
+                    System Design for Scalability
+                  </h4>
+                  <p class="text-slate-400 text-sm mt-1">
+                    Difficulty: Advanced • Est. Time: 12 hrs
+                  </p>
+                  <div class="mt-3 flex gap-2">
+                    <span
+                      class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400 uppercase font-bold"
+                      >Backend</span
+                    >
+                    <span
+                      class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400 uppercase font-bold"
+                      >Architecture</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-emerald-400 font-mono text-sm">82% Match</div>
+                <button
+                  class="mt-4 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm font-bold transition"
+                >
+                  View Syllabus
+                </button>
+              </div>
+            </div>
+            <div
+              class="mt-4 pt-4 border-t border-slate-800 text-xs text-slate-500 italic"
+            >
+              "Recommended because students with your profile (Python + Cloud)
+              usually move to System Design next."
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Initialize Icons
+      lucide.createIcons();
+
+      // Visualization Logic (Radar Chart)
+      const ctx = document.getElementById("skillChart").getContext("2d");
+      new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: [
+            "Logic",
+            "Consistency",
+            "Speed",
+            "Precision",
+            "Theory",
+            "Practical",
+          ],
+          datasets: [
+            {
+              label: "Current Progress",
+              data: [80, 95, 70, 85, 60, 90],
+              backgroundColor: "rgba(99, 102, 241, 0.2)",
+              borderColor: "#6366f1",
+              borderWidth: 2,
+              pointBackgroundColor: "#6366f1",
+            },
+          ],
+        },
+        options: {
+          scales: {
+            r: {
+              grid: { color: "#334155" },
+              angleLines: { color: "#334155" },
+              pointLabels: { color: "#94a3b8" },
+              ticks: { display: false },
+            },
+          },
+          plugins: { legend: { display: false } },
+        },
+      });
+    </script>
+  </body>
+</html>
