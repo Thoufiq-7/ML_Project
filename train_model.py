@@ -19,9 +19,12 @@ tfidf_matrix = tfidf.fit_transform(df['content'])
 cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
 
 # Save the DF and the SIMILARITY MATRIX
+# ... (rest of your training code)
 model_data = {
     'df': df,
-    'cosine_sim': cosine_sim
+    'cosine_sim': cosine_sim,
+    'tfidf': tfidf,          # Add this!
+    'tfidf_matrix': tfidf_matrix # Add this!
 }
 
 with open('model.pkl', 'wb') as f:

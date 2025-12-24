@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap");
 :root {
   --bg-dark: #050505;
-  --card-bg: #3c4f87;
-  --accent: #00ff41;
+  --card-bg: #d1d4d2;
+  --accent: #101712;
   --accent-glow: rgba(0, 255, 65, 0.3);
 
   /* NEW FONT VARIABLES */
@@ -129,7 +129,7 @@ h3 {
 
 /* 2. The Neon Input Field */
 input {
-  background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent */
+  background: rgba(238, 236, 236, 0.7); /* Dark semi-transparent */
   border: 1px solid var(--accent);
   color: var(--accent);
   padding: 12px 20px;
@@ -138,15 +138,13 @@ input {
   font-family: var(--font-main);
   outline: none;
   /* The Glow */
-  box-shadow: 0 0 5px var(--accent-glow), 
-              inset 0 0 5px var(--accent-glow);
+  box-shadow: 0 0 5px var(--accent-glow), inset 0 0 5px var(--accent-glow);
   transition: all 0.3s ease;
 }
 
 input:focus {
-  box-shadow: 0 0 15px var(--accent), 
-              inset 0 0 10px var(--accent-glow);
-  background: #000;
+  box-shadow: 0 0 15px var(--accent), inset 0 0 10px var(--accent-glow);
+  background: #ecebeb;
 }
 
 /* 3. The Neon Button (The "Power" Switch) */
@@ -193,7 +191,7 @@ button:hover {
 .course-card {
   min-width: 220px;
   max-width: 220px;
-  background: #000;
+  background: #f2e4e4;
   border: 1px solid #222;
   border-radius: 10px;
   padding: 15px;
@@ -208,4 +206,8 @@ button:hover {
   border-color: var(--accent);
   box-shadow: 0 0 15px var(--accent-glow);
   transform: translateY(-5px);
+}
+
+.seac{
+  text-align:center
 }

@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div class="parent">
@@ -24,27 +25,27 @@
       </div>
 
       <div class="div3">
-        <h3>Trending</h3>
-        <p>Data Science</p>
-        <p>Web Dev</p>
-        <p>AIML</p>
-        <p>Cloud Computing</p>
-        <p>Figma</p>
-        <p>UI/UX Design</p>
+        <h3>Interest Map</h3>
+        <div style="height: 80%; width: 100%">
+          <canvas id="patternChart"></canvas>
+        </div>
       </div>
 
       <div class="div4">
-        <h3>Filters</h3>
-        <span class="badge">Beginner</span>
-        <span class="badge">Advanced</span>
+        <h3>Model Precision</h3>
+        <div id="metricsDisplay">
+          <p>Precision@10: <span id="pAtK">0%</span></p>
+          <p>Recall@10: <span id="rAtK">0%</span></p>
+        </div>
       </div>
 
       <div class="div5">
         <h3>Recommended for You</h3>
         <div id="resultsList" class="netflix-row"></div>
+        <p class="seac">Search Courses</p>
       </div>
 
-      <div class="div2">System Status: Operational</div>
+      <div class="div2" id="aiReasoning">System Status: Ready for Query</div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
