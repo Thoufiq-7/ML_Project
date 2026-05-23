@@ -1,3 +1,5 @@
+Project done by : KESAVAN BALAJI (ML AND BACKEND) , MOHAMMED THOUFIQ N (FRONTEND)
+
 🤖 AI Course Recommender (Cyber-Advisor)
 A machine learning-powered course recommendation system built with Flask, Scikit-Learn, and Google Gemini 2.5 Flash. This project uses RAG (Retrieval-Augmented Generation) to suggest courses based on user queries and provide AI-generated advice.
 
